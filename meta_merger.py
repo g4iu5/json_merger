@@ -42,7 +42,7 @@ else:
     FILE_TO   = 't0.json'
 FILE_OUT = 'WSP_info.json'
 
-def is_scalar(var_in) -> bool:
+def isscalar(var_in) -> bool:
     """Checks if value is scalar or not
     
     Args:
@@ -86,7 +86,7 @@ def merge_dicts(json_from, json_to):
     """
     for key, value in json_from.items():
         # Is scalar?
-        if is_scalar(value):
+        if isscalar(value):
             if key in json_to.keys():
                 json_to[key] = value
             else:
@@ -111,7 +111,7 @@ def merge_lists(json_from, json_to):
     """
     for value in json_from:
         # Is scalar?
-        if is_scalar(value):
+        if isscalar(value):
             if value not in json_to:
                 json_to.append(value)
 
@@ -135,7 +135,7 @@ def walk_n_merge(json_from, json_to):
     if isinstance(json_from, list) and isinstance(json_to, list):
         merge_lists(json_from, json_to)
 
-    if is_scalar(json_from) and is_scalar(json_to):
+    if isscalar(json_from) and isscalar(json_to):
         raise ValueError('err!')
 
     if type(json_from) != type(json_to):
